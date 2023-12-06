@@ -19,10 +19,10 @@ df['50_day_MA'] = df['Price'].rolling(window=50).mean()
 fig = px.line(df, x='Date', y=['Price', '10_day_MA', '50_day_MA'], title='Price Over Time', line_shape='linear', line_dash_sequence=['solid', 'solid', 'solid'], color_discrete_sequence=['white', 'blue', 'green'])
 
 # Streamlit App
-st.title("Assignment Analysis")
+st.title("Greencell Mobility || Data Analysis")
 
 # Description
-st.markdown("Welcome to my assignment analysis website. This page displays data and charts from my assignment.")
+st.markdown("Welcome to my data analysis website. This page displays data and charts from my assignment.")
 
 # Show the Excel data
 st.subheader("Excel Data:")
