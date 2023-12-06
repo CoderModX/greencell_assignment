@@ -16,7 +16,7 @@ df['10_day_MA'] = df['Price'].rolling(window=10).mean()
 df['50_day_MA'] = df['Price'].rolling(window=50).mean()
 
 # Create an interactive line chart with Plotly Express
-fig = px.line(df, x='Date', y=['Price', '10_day_MA', '50_day_MA'], title='Price Over Time')
+fig = px.line(df, x='Date', y=['Price', '10_day_MA', '50_day_MA'], title='Price Over Time', line_color=['white', 'blue', 'green'])
 
 # Streamlit App
 st.title("Assignment Analysis")
