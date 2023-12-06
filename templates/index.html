@@ -1,0 +1,119 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Greencell Mobility || Data Analysis</title>
+    <!-- Include Plotly JavaScript library -->
+    {{ plotly_js | safe }}
+    <style>
+        body {
+            background-color: rgb(14, 17, 23);
+            font-family: 'Source Sans Pro', sans-serif;
+            text-size-adjust: 100%;
+            color: white;
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        h1, h2, p {
+            margin-left: 50px;
+        }
+
+        #plot {
+            width: 90%;
+            margin: 20px auto;
+            background: transparent !important;
+        }
+
+        #excel-table {
+            margin: 20px;
+            color: white;
+        }
+
+        #table-modal {
+            display: none;
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background-color: rgba(0, 0, 0, 0.7);
+            justify-content: center;
+            align-items: center;
+        }
+
+        #table-content {
+            background-color: rgb(30, 30, 30);
+            padding: 20px;
+            border-radius: 5px;
+            max-width: 80%;
+            max-height: 80%;
+            overflow: auto;
+        }
+
+        .button {
+            display: inline-block;
+            margin-left: 50px;
+            padding: 10px 20px;
+            font-size: 16px;
+            color: white;
+            background-color: #3498db;
+            border: none;
+            border-radius: 5px;
+            cursor: pointer;
+            transition: background-color 0.3s ease;
+        }
+
+        .button:hover {
+            background-color: #2980b9;
+        }
+    </style>
+</head>
+<body>
+    <h1>Greencell Mobility || Data Analysis</h1>
+    <p>Welcome to my data analysis website. This page displays data and charts from my assignment.</p>
+        <!-- Embed the Plotly chart directly -->
+        <h2>Price Over Time Chart : </h2>
+        <div id="plot">
+            {{ plot_html | safe }}
+        </div>
+    
+        <h2>Excel Data : </h2>
+        <!-- Button to open the table modal -->
+        <button class="button" onclick="openTableModal()">View Excel Data</button>
+    
+        <!-- Modal for displaying the full table -->
+        <div id="table-modal">
+            <div id="table-content">
+                <h2>Excel Data</h2>
+                <table border="1" cellpadding="5">
+                    <tr>
+                        {% for col in df.columns %}
+                            <th>{{ col }}</th>
+                        {% endfor %}
+                    </tr>
+                    {% for row in df.values %}
+                        <tr>
+                            {% for val in row %}
+                                <td>{{ val }}</td>
+                            {% endfor %}
+                        </tr>
+                    {% endfor %}
+                </table>
+                <button class="button" onclick="closeTableModal()">Close</button>
+            </div>
+        </div>    
+        <p>Thanks for checking out my analysis! Feel free to explore the data and charts above.</p>
+    <script>
+        function openTableModal() {
+            document.getElementById('table-modal').style.display = 'flex';
+        }
+
+        function closeTableModal() {
+            document.getElementById('table-modal').style.display = 'none';
+        }
+    </script>
+</body>
+</html>
