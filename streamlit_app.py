@@ -30,7 +30,7 @@ st.write(df)
 
 # Show the Plotly chart
 st.subheader("Price Over Time Chart:")
-st.plotly_chart(fig)
+st.plotly_chart(fig, use_container_width=True)
 
 # Footer
 st.markdown("Thanks for checking out my analysis! Feel free to explore the data and charts above.")
