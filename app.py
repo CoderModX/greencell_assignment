@@ -1,13 +1,14 @@
-from flask import Flask, render_template
+from flask import Flask, render_template, send_file
 import pandas as pd
 import plotly.express as px
 import plotly.graph_objects as go
 import plotly.io as pio
+import io
 
 app = Flask(__name__)
 
 # Step 1: Load Excel data into a Pandas DataFrame
-df = pd.read_excel('GreenCell_Assignment.xlsx')
+df = pd.read_excel('/home/Divyansh2023/mysite/GreenCell_Assignment.xlsx')
 
 # Step 2: Create an interactive line chart with Plotly Express
 # Plot the chart with date on the x-axis and values on the y-axis
@@ -44,6 +45,21 @@ fig.update_layout(legend=dict(
 # Step 4: Show the chart figure
 # Convert the plot to HTML
 plot_html = pio.to_html(fig, full_html=False)
+
+# Add a new route for downloading the Excel sheet
+@app.route('/download_excel')
+def download_excel():
+    # Create a BytesIO object to store the Excel file
+    excel_buffer = io.BytesIO()
+
+    # Write the DataFrame to the BytesIO object as an Excel file
+    df.to_excel(excel_buffer, index=False)
+
+    # Seek to the beginning of the BytesIO object
+    excel_buffer.seek(0)
+
+    # Return the BytesIO object as a file for download
+    return send_file(excel_buffer, download_name='greencell_data.xlsx', as_attachment=True)
 
 @app.route('/')
 def index():
