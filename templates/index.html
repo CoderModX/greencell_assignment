@@ -74,16 +74,16 @@
 <body>
     <h1>Greencell Mobility || Data Analysis</h1>
     <p>Welcome to my data analysis website. This page displays data and charts from my assignment.</p>
-        <!-- Embed the Plotly chart directly -->
-        <h2>Price Over Time Chart : </h2>
-        <div id="plot">
-            {{ plot_html | safe }}
-        </div>
-    
+
+    <!-- Embed the Plotly chart directly -->
+    <div id="plot">
+        {{ plot_html | safe }}
+    </div>
+
         <h2>Excel Data : </h2>
         <!-- Button to open the table modal -->
         <button class="button" onclick="openTableModal()">View Excel Data</button>
-    
+
         <!-- Modal for displaying the full table -->
         <div id="table-modal">
             <div id="table-content">
@@ -102,10 +102,13 @@
                         </tr>
                     {% endfor %}
                 </table>
-                <button class="button" onclick="closeTableModal()">Close</button>
+            <a href="{{ url_for('download_excel') }}" class="button">Download Excel</a>
+            <button class="button" onclick="closeTableModal()">Close</button>
             </div>
-        </div>    
+        </div>
         <p>Thanks for checking out my analysis! Feel free to explore the data and charts above.</p>
+
+
     <script>
         function openTableModal() {
             document.getElementById('table-modal').style.display = 'flex';
